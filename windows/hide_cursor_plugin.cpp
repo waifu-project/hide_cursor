@@ -42,7 +42,7 @@ HideCursorPlugin::~HideCursorPlugin() {
     // Calling ShowCursor(TRUE) increments the counter, ShowCursor(FALSE) decrements it
     // When the counter is less than 0, the cursor is hidden
     // To ensure the cursor is visible, we may need to call ShowCursor(TRUE) multiple times
-    while (ShowCursor(TRUE) < 0) {
+    while (::ShowCursor(TRUE) < 0) {
       // Continue calling until the counter is greater than or equal to 0
     }
     is_cursor_hidden_ = false;
@@ -51,7 +51,7 @@ HideCursorPlugin::~HideCursorPlugin() {
 
 void HideCursorPlugin::HideCursor() {
   if (!is_cursor_hidden_) {
-    ShowCursor(FALSE);
+    ::ShowCursor(FALSE);
     is_cursor_hidden_ = true;
   }
 }
@@ -59,7 +59,7 @@ void HideCursorPlugin::HideCursor() {
 void HideCursorPlugin::ShowCursor() {
   if (is_cursor_hidden_) {
     // Ensure cursor is visible
-    while (ShowCursor(TRUE) < 0) {
+    while (::ShowCursor(TRUE) < 0) {
       // Continue calling until the counter is greater than or equal to 0
     }
     is_cursor_hidden_ = false;
